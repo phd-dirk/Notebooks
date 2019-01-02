@@ -1,0 +1,5 @@
+# List of scripts
+- bin_upper_edges.ipynb
+
+## bin_upper_edges.ipynb
+Calculates and prints right corner of bins, which we use as fitting s0s. Bins bigger than m_\tau^2 (3.157) are not used.
