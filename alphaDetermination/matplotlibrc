@@ -10,16 +10,18 @@ axes.facecolor      : 383838   # axes background color
 axes.edgecolor      : bcbcbc   # axes edge color
 axes.grid           : True     # display grid or not
 axes.labelcolor     : dcdccc
-axes.titlesize      : 16
+axes.titlesize      : 18 
 
 xtick.color          : dcdccc      # color of the tick labels
 xtick.direction      : in     # direction: in or out
 ytick.color          : dcdccc      # color of the tick labels
 ytick.direction      : in     # direction: in or out
+xtick.major.size     : 18
+xtick.major.size     : 18
 
 legend.fancybox      : True  # if True, use a rounded box for the
-legend.fontsize      : 16
+legend.fontsize      : 18
 
 figure.facecolor : 3f3f3f   # figure facecolor; 0.75 is scalar gray
 figure.edgecolor : 383838   # figure edgecolor
-figure.figsize   : 42, 14   # figure size in inches NOT WORKING?
+figure.figsize   : 21, 7   # figure size in inches NOT WORKING?
