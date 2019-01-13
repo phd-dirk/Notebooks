@@ -25,3 +25,4 @@ legend.fontsize      : 18
 figure.facecolor : 3f3f3f   # figure facecolor; 0.75 is scalar gray
 figure.edgecolor : 383838   # figure edgecolor
 figure.figsize   : 21, 7   # figure size in inches NOT WORKING?
+figure.titlesize : 18
