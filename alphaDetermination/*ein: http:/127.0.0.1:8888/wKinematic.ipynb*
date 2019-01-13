@@ -1,0 +1,139 @@
+
+In [11]:
+import numpy as np
+import pandas as pd
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+mpl.rcParams['figure.figsize'] = 21, 7
+
+h1:
+Kinematic Weight (1-x)^2(1+2x)
+
+h2:
+Fit: D6, D8
+
+In [13]:
+data = np.genfromtxt('../../FESR/configurations/2019/wKinematicD6D8/fits.csv', delimiter=',', skip_header=2)
+df = pd.DataFrame(
+    data,
+    index=[
+        'smin15', 'smin1525', 'smin155', 'smin1575', 'smin16', 'smin1625',
+        'smin165', 'smin1675', 'smin17', 'smin175', 'smin18', 'smin185', 'smin19',
+        'smin195', 'smin20', 'smin21', 'smin22', 'smin23', 'smin24', 'smin26', 'smin28'
+    ],
+    columns=[
+        'status', 'alpha', 'alphaErr', 'aGGInv', 'aGGInvErr', 'c6', 'c6Err',
+        'c8', 'c8Err', 'c10', 'c10Err', 'c12', 'c12Err', 'chi', 'dof',
+        'chiDof', 'edm', 'del0', 'del4', 'del6', 'del8', 'del10', 'del12'
+    ]
+)
+#print('Table:')
+#print(df[['c6', 'c6Err', 'c8', 'c8Err', 'chiDof']])
+c6s = data[:,5]
+c6Errs = data[:,6]
+c8s = data[:,7]
+c8Errs = data[:,8]
+s0s = list(range(23, 2, -1))
+plt.errorbar(s0s, c6s, yerr=c6Errs, barsabove=True, fmt='.', marker='o')
+plt.errorbar(s0s, c8s, yerr=c8Errs, barsabove=True, fmt='.', marker='o')
+plt.title('Kinematic weight with fixed \alpha_s c6 and c8 with errors')
+plt.legend(['c6 with errors', 'c8 with errors'])
+plt.show()
+bestWKinematicD6D8Row = data[5,:]
+.
+
+markdown:
+- D6 and D8 are strongly correlated.
+- They converge with increasing s0s close to zero with a slightly negative value.
+- Their values get closer with increasing s0s.
+- Their errors decrease (vanish) with increasing s0s number.
+- It has a sinusial behavior with exponential decreasing amplitude
+  (like the DV-model) for an increasing number of s0s.
+
+h2:
+Fit: D6, D8, Alpha
+
+In [2]:
+data = np.genfromtxt('../../FESR/configurations/2018/wKinematicD6D8Alpha/fits.csv', delimiter=',', skip_header=2)
+print('Table:')
+df = pd.DataFrame(
+    data,
+    index=[
+        'smin15', 'smin1525', 'smin155', 'smin1575', 'smin16', 'smin1625',
+        'smin165', 'smin1675', 'smin17', 'smin175', 'smin18', 'smin185', 'smin19',
+        'smin195', 'smin20', 'smin21', 'smin22', 'smin23', 'smin24', 'smin26', 'smin28'
+    ],
+    columns=[
+        'status', 'alpha', 'alphaErr', 'aGGInv', 'aGGInvErr', 'c6', 'c6Err',
+        'c8', 'c8Err', 'c10', 'c10Err', 'c12', 'c12Err', 'chi', 'dof',
+        'chiDof', 'edm', 'del0', 'del4', 'del6', 'del8', 'del10', 'del12'
+    ]
+)
+print(df[['alpha', 'alphaErr', 'c6', 'c6Err', 'c8', 'c8Err', 'chiDof']])
+chi2Dofs = data[:,15]
+als = data[:,1]
+alErrs = data[:,2]
+c6s = data[:,5]
+c6Errs = data[:,6]
+c8s = data[:,7]
+c8Errs = data[:,8]
+s0s = np.array([9, 8, 7, 6, 5, 4])
+plt.suptitle('(1-x)^2(1-2x) with free D6, D8 and Alpha for different s0s')
+plt.title('Chi2/Dof')
+plt.subplot(2, 2, 1)
+plt.title('chi2')
+plt.plot(chi2Dofs)
+plt.subplot(2, 2, 2)
+plt.title('alpha with errors')
+plt.errorbar(s0s, als, yerr=alErrs, barsabove=True, fmt='.', marker='o')
+plt.subplot(2, 2, 3)
+plt.title('c6 with errors')
+plt.errorbar(s0s, c6s, yerr=c6Errs, barsabove=True, fmt='.', marker='o')
+plt.subplot(2, 2, 4)
+plt.title('c8 with errors')
+plt.errorbar(s0s, c8s, yerr=c8Errs, barsabove=True, fmt='.', marker='o')
+plt.show()
+bestWKinematicD6D8AlphaRow = data[1,:]
+Table:
+
+
+Truncated Traceback (Use M-x ein:tb-show to view full TB):
+/usr/local/lib/python3.7/site-packages/pandas/core/internals.py in construction_error(tot_items, block_shape, axes, e)
+   4841         raise ValueError("Empty data passed with indices specified.")
+   4842     raise ValueError("Shape of passed values is {0}, indices imply {1}".format(
+-> 4843         passed, implied))
+   4844 
+   4845 
+
+ValueError: Shape of passed values is (23, 6), indices imply (23, 21)
+
+
+markdown:
+The chi2/dof has a good value for the first two moments (4 and 5 s0s), but gets
+to low with increasing s0s number. Alpha_s and its is decreasing with the
+number of used s0s. Alpha_s has a stabel value around 0.33. c6 and c8 are
+negative and aproaching 0 with increasing moments.
+
+In [5]:
+bestWKinematicRows = np.array([bestWKinematicD6D8Row, bestWKinematicD6D8AlphaRow])
+%store bestWKinematicRows
+Stored 'bestWKinematicRows' (ndarray)
+
+
+In [10]:
+plt.suptitle('Delta contribs of (1-x)^2(1-2x) with free D6, D8 and Alpha for "best" rows')
+deltasD6D8 = np.array([abs(x) for x in bestWKinematicRows[0,18:]])
+deltasD6D8Alpha = np.array([abs(x) for x in bestWKinematicRows[1,18:]])
+deltaVec = ['del4', 'del6', 'del8', 'del10', 'del12']
+plt.subplot(2, 2, 1)
+plt.title('deltas: D6 and D8')
+plt.plot(deltaVec, deltasD6D8)
+plt.subplot(2, 2, 2)
+plt.title('deltas: D6, D8 and Alpha free')
+plt.plot(deltaVec, deltasD6D8Alpha)
+plt.show()
+.
+
+In [ ]:
+
+
