@@ -4,22 +4,27 @@ text.usetex         : true
 
 axes.grid           : True     # display grid or not
 axes.titlesize      : 18 
+axes.labelsize      : 18
 
-xtick.direction      : in     # direction: in or out
-ytick.direction      : in     # direction: in or out
-xtick.major.size     : 18
-xtick.major.size     : 18
+xtick.direction     : in     # direction: in or out
+xtick.major.size    : 10 
+xtick.labelsize     : 13
 
-legend.fancybox      : True  # if True, use a rounded box for the
-legend.fontsize      : 18
-legend.framealpha    : 0.9
+ytick.direction     : in     # direction: in or out
+ytick.major.size    : 10 
+ytick.labelsize     : 13
 
-figure.facecolor : 3f3f3f   # figure facecolor; 0.75 is scalar gray
-figure.edgecolor : 383838   # figure edgecolor
+legend.fancybox     : True  # if True, use a rounded box for the
+legend.fontsize     : 18
+legend.framealpha   : 0.9
+
+figure.facecolor    : white
 figure.figsize   : 21, 7   # figure size in inches NOT WORKING?
 figure.titlesize : 18
 
 # dark mode
+# figure.facecolor : 3f3f3f   # figure facecolor; 0.75 is scalar gray
+# figure.edgecolor : 383838   # figure edgecolor
 # text.color          : dcdccc
 
 # patch.facecolor        : 8cd0d3 # blue
