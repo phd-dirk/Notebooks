@@ -27,7 +27,7 @@ variables = {
         "stepSize": 0.1
     },
     "c12": {
-        "fixed": False,
+        "fixed": True,
         "value": 0.020061955135371096,
         "stepSize": 0.1
     },

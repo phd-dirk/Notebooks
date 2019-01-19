@@ -16,10 +16,12 @@ ytick.labelsize     : 13
 
 legend.fancybox     : True  # if True, use a rounded box for the
 legend.fontsize     : 18
-legend.framealpha   : 0.9
+legend.framealpha   : None
+legend.frameon      : True
+legend.shadow       : True
 
 figure.facecolor    : white
-figure.figsize   : 21, 7   # figure size in inches NOT WORKING?
+figure.figsize   : 21, 10   # figure size in inches NOT WORKING?
 figure.titlesize : 18
 
 # dark mode
