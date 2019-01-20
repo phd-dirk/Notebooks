@@ -156,12 +156,13 @@ configTemplate = {
         "D4": True,
         "D68": True,
         "D10": True,
-        "D12": True,
+        "D12": False,
         "DV": False,
         "PionPole": True
     },
     "variables": variables
 }
+
 
 i = 0
 for s0 in s0s:

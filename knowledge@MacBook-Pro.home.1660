@@ -6,5 +6,5 @@
 Calculates and prints right corner of bins, which we use as fitting s0s. Bins bigger than m_\tau^2 (3.157) are not used.
 
 ## FESRConfigGenerator.py
-Change *variables*, *s0s*, *weight* and *configTemplate* (*thMomContribs*). Then execute `FESRConfigGenerator.py` from the directory, in which the *configuration.json* files should be created.
+Change *variables*, *s0s*, *weight* and *configTemplate* (*thMomContribs*). Then execute `python ../.../FESRConfigGenerator.py` from the directory, in which the *configuration.json* files should be created.
 
