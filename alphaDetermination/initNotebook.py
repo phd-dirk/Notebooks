@@ -61,7 +61,41 @@ def read_csv(path, exclude=[]):
     df = df[df['status']==0]
     return df
 
-def testOPESeriesForConvergence(df, minDiff=1e-1, dims=[6, 8]):
+def testOPESeriesForConvergence(df, minDiff=1e-1, upToDim=8):
     def compare(x):
-        return x < deltaDelta
-    return (abs(df['del^(6)']) - abs(df['del^(8)'])).apply(compare)
+        return x < minDiff
+    c6c8 = (abs(df['del^(6)']) - abs(df['del^(8)'])).apply(compare)
+
+    if upToDim == 8:
+        return c6c8
+    if upToDim == 10:
+        c8c10 = (abs(df['del^(8)']) - abs(df['del^(10)'])).apply(compare)
+        return c6c8 & c8c10
+    if upToDim == 12:
+        c8c10 = (abs(df['del^(8)']) - abs(df['del^(10)'])).apply(compare)
+        c10c12 = (abs(df['del^(10)']) - abs(df['del^(12)'])).apply(compare)
+        return c6c8 & c8c10 & c10c12
+
+
+def importAll():
+    global wKinD6D8, wKinAlD6D8
+    wKinD6D8 = read_csv('../../FESR/configurations/2019/wKinematicD6D8/fits.csv')
+    wKinAlD6D8 = read_csv('../../FESR/configurations/2019/wKinematicAlphaD6D8/fits.csv')
+
+    global wCubeAlD6D8, wCubeAlD6D8D10, wCubeD6D8, wCubeD6D8D10
+    wCubeAlD6D8 = read_csv('../../FESR/configurations/2019/wCubeAlphaD6D8/fits.csv')
+    wCubeAlD6D8D10 = read_csv('../../FESR/configurations/2019/wCubeAlphaD6D8D10/fits.csv')
+    wCubeD6D8 = read_csv('../../FESR/configurations/2019/wCubeD6D8/fits.csv')
+    wCubeD6D8D10 = read_csv('../../FESR/configurations/2019/wCubeD6D8D10/fits.csv')
+
+    global wQuarticAlD6D8, wQuarticAlD6D8D10, wQuarticAlD6D8D10D12, wQuarticD6D8, wQuarticD6D8D10, wQuarticD6D8D10D12
+    wQuarticAlD6D8 = read_csv('../../FESR/configurations/2019/wQuarticAlphaD6D8/fits.csv')
+    wQuarticAlD6D8D10 = read_csv('../../FESR/configurations/2019/wQuarticAlphaD6D8D10/fits.csv')
+    wQuarticAlD6D8D10D12 = read_csv('../../FESR/configurations/2019/wQuarticAlphaD6D8D10D12/fits.csv')
+    wQuarticD6D8 = read_csv('../../FESR/configurations/2019/wQuarticD6D8/fits.csv')
+    wQuarticD6D8D10 = read_csv('../../FESR/configurations/2019/wQuarticD6D8D10/fits.csv')
+    wQuarticD6D8D10D12 = read_csv('../../FESR/configurations/2019/wQuarticD6D8D10D12/fits.csv')
+
+
+def getBestRow(df):
+    return df.loc[df['chiDof'].idxmin()]
