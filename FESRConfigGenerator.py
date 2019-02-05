@@ -186,20 +186,17 @@ if mode == 'normal':
         i += 1
 elif mode == 'weightCombinations':
     weightCombinations = [[1, 14], [1, 15], [14, 15], [1, 14, 15]]
-    s0sNum = 10
+    s0sNum = 1
     for index, weights in enumerate(weightCombinations):
-        s0sNum = int(round(10 / len(weights)))
+        # s0sNum = int(round(s0sNum / len(weights)))
         xS0s = s0s[0:s0sNum]
         usedWeightsStr = ''
+        configTemplate['parameters']['input'] = []
         for wIdx, weight in enumerate(weights):
-            if wIdx == 0:
-                configTemplate['parameters']['input'][0]['s0s'] = xS0s
-                configTemplate['parameters']['input'][0]['weight'] = weight
-            else:
-                configTemplate['parameters']['input'].append({
-                    's0s': xS0s,
-                    'weight': weight
-                })
+            configTemplate['parameters']['input'].append({
+                's0s': xS0s,
+                'weight': weight
+            })
             usedWeightsStr += weightDict[weight]+'_'
 
         f = open(usedWeightsStr+"smin"+str(xS0s[-1]).replace(".","")+".json", "w+")
