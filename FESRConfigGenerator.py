@@ -1,6 +1,7 @@
 import json
 
-sparseS0s = True
+mode = 'weightCombinations' # can be normal, sparse or weightCombinations
+
 variables = {
     "astau": {
         "fixed": False,
@@ -175,7 +176,7 @@ configTemplate = {
 }
 
 
-if not sparseS0s:
+if mode == 'normal':
     i = 0
     for s0 in s0s:
         if dof(s0s[:i+1], variables) > 0:
@@ -183,7 +184,30 @@ if not sparseS0s:
             configTemplate["parameters"]["input"][0]["s0s"] = s0s[:i+1]
             f.write(json.dumps(configTemplate, indent=2))
         i += 1
-else:
+elif mode == 'weightCombinations':
+    weightCombinations = [[1, 14], [1, 15], [14, 15], [1, 14, 15]]
+    s0sNum = 10
+    for index, weights in enumerate(weightCombinations):
+        s0sNum = int(round(10 / len(weights)))
+        xS0s = s0s[0:s0sNum]
+        usedWeightsStr = ''
+        for wIdx, weight in enumerate(weights):
+            if wIdx == 0:
+                configTemplate['parameters']['input'][0]['s0s'] = xS0s
+                configTemplate['parameters']['input'][0]['weight'] = weight
+            else:
+                configTemplate['parameters']['input'].append({
+                    's0s': xS0s,
+                    'weight': weight
+                })
+            usedWeightsStr += weightDict[weight]+'_'
+
+        f = open(usedWeightsStr+"smin"+str(xS0s[-1]).replace(".","")+".json", "w+")
+        f.write(json.dumps(configTemplate, indent=2))
+
+
+
+elif mode == 'sparse':
     for i in range(1,9): # change range for different sparse settings
         s0sNum = 10
         xS0s = s0s[0::i][0:s0sNum]
