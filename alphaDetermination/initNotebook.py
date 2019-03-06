@@ -14,9 +14,10 @@ sminMap = {
     'smin18': 13, 'smin185': 12, 'smin19': 11, 'smin195': 10, 'smin20': 9,
     'smin21': 8, 'smin22': 7, 'smin23': 6, 'smin24': 5, 'smin26': 4, 'smin28': 3
 }
-def addAx(axarr, i, cols, data, title='', ylabel='', ylim=(None, None), exErr=[]):
+def addAx(axarr, i, cols, data, title='', ylabel='', xlabel='', ylim=(None, None), exErr=[]):
     axarr[i].set_title(title)
     axarr[i].set_ylabel(ylabel)
+    axarr[i].set_xlabel(xlabel)
     if(ylim != (None, None)):
         axarr[i].set_ylim(ylim)
     s0s = list(map(lambda smin: sminMap[smin], data.index))

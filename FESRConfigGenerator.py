@@ -186,10 +186,9 @@ if mode == 'normal':
         i += 1
 elif mode == 'weightCombinations':
     weightCombinations = [[1, 14], [1, 15], [14, 15], [1, 14, 15]]
-    s0sNum = 1
+    s0sNum = 6
     for index, weights in enumerate(weightCombinations):
-        # s0sNum = int(round(s0sNum / len(weights)))
-        xS0s = s0s[0:s0sNum]
+        xS0s = s0s[0:int(round(s0sNum / len(weights)))]
         usedWeightsStr = ''
         configTemplate['parameters']['input'] = []
         for wIdx, weight in enumerate(weights):
