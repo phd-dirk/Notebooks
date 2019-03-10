@@ -1,6 +1,6 @@
 import json
 
-mode = 'weightCombinations' # can be normal, sparse or weightCombinations
+mode = 'normal' # can be normal, sparse or weightCombinations
 
 variables = {
     "astau": {
@@ -14,17 +14,17 @@ variables = {
         "stepSize": 0.01
     },
     "rhoVpA": {
-        "fixed": False,
+        "fixed": True,
         "value": -0.43951675901525256,
         "stepSize": 0.01
     },
     "c8VpA": {
-        "fixed": False,
+        "fixed": True,
         "value": -0.28826688671913298,
         "stepSize": 0.01
     },
     "c10": {
-        "fixed": True,
+        "fixed": False,
         "value": 0.8756740718569338,
         "stepSize": 0.1
     },
@@ -103,7 +103,7 @@ dsbins = [
 
 #s0s.sort()
 weightDict = {1: 'wKin', 14: 'wCube', 15: 'wQuart'}
-weight = 1
+weight = 17
 
 def dof(s0s, variables):
     dof = len(s0s)
@@ -124,7 +124,7 @@ def dof(s0s, variables):
 
 
 configTemplate = {
-    "version": 0.8,
+    "version": 0.9,
     "scheme": "FO",
     "tolerance": 1e-6,
     "parameters": {
@@ -166,8 +166,9 @@ configTemplate = {
         "D0": True,
         "D2": False,
         "D4": True,
-        "D68": True,
-        "D10": False,
+        "D6": False,
+        "D8": False,
+        "D10": True,
         "D12": False,
         "DV": False,
         "PionPole": True
