@@ -9,12 +9,16 @@ def getUncertaintyParenthesis(val, err):
     digits = 2
 
     eVal = '%e' % err
-    if not eVal[9] == '+':
-        errZeroes = int(eVal.partition('-')[2])-1
-        parenthesisErr = int(round(err*10**(errZeroes+digits),0))
+    # if error = 0 then variable was not fitted. We output '-' in that case
+    if not err == 0:
+        if not eVal[9] == '+':
+            errZeroes = int(eVal.partition('-')[2])-1
+            parenthesisErr = int(round(err*10**(errZeroes+digits),0))
+        else:
+            errZeroes = 0
+            parenthesisErr = int(str(round(err*10**(digits),0))[:2])
     else:
-        errZeroes = 0
-        parenthesisErr = int(str(round(err*10**(digits),0))[:2])
+        return '-'
 
 
     return '{val:.0{width}f}'.format(val=val,width=errZeroes+digits)+'('+str(parenthesisErr)+')'
@@ -92,7 +96,17 @@ def addAx(axarr, i, cols, data, title='', ylabel='', xlabel='', ylim=(None, None
 
 
 def getBestRow(df):
-    return df.loc[df['chiDof'].idxmin()]
+    # get row closest to one
+    diff = 100
+    for index, row in df.iterrows():
+        xDiff = abs(1-row['chiDof'])
+        if(diff > xDiff):
+            selectedRow = row
+            diff = xDiff
+
+
+    return selectedRow
+    # return df.loc[df['chiDof'].idxmin()]
 
 def importAll():
     global wKinD6D8, wKinAlD6D8
