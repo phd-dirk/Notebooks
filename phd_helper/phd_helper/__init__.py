@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
+import intervals as I
 plt.style.use('./matplotlibrc')
 
 def getUncertaintyParenthesis(val, err):
@@ -127,3 +128,15 @@ def importAll():
     wQuarticD6D8D10 = read_csv('../../FESR/configurations/2019/wQuarticD6D8D10/fits.csv')
     wQuarticD6D8D10D12 = read_csv('../../FESR/configurations/2019/wQuarticD6D8D10D12/fits.csv')
 
+
+def isVarWithinErrBoundaries(df, var):
+    intvls = []
+    for index, row in df.iterrows():
+        intvls.append(I.closed(row[var]-row[var+'Err'], row[var]+row[var+'Err']))
+
+        def intvlFunc(intvl):
+            for xIntvl in intvls:
+                if (xIntvl & intvl).is_empty():
+                    return False
+                return True
+    return list(map(intvlFunc, intvls))
