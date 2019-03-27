@@ -140,3 +140,32 @@ def isVarWithinErrBoundaries(df, var):
                     return False
                 return True
     return list(map(intvlFunc, intvls))
+
+# ------------------------------------------------------------------------------
+# OPE convergence --------------------------------------------------------------
+# ------------------------------------------------------------------------------
+def count_leading_zeros(x):
+    xE = '%e' % abs(x)
+    exp = xE.partition('-')[2]
+    if exp == '':
+        return 0
+    return int(xE.partition('-')[2])-1
+
+def is_OPE_convergent(deltas):
+    zeros = list(map(count_leading_zeros, deltas))
+    for i in range(len(deltas)):
+        j = i+1
+        if j <= len(deltas):
+            for j in range(j,len(deltas)):
+                if (zeros[i] - zeros[j]) >= 0:
+                    return False
+    return True
+
+def has_df_convergent_OPE(df, dimensions):
+    delta_names = list(map(lambda dim: 'del^('+str(dim)+')', dimensions))
+    is_convergent = []
+    for deltas in df[delta_names].values.tolist():
+        is_convergent.append(is_OPE_convergent(deltas))
+
+    return is_convergent
+# ------------------------------------------------------------------------------

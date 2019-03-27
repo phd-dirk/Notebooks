@@ -4,12 +4,12 @@ mode = 'normal' # can be normal, sparse or weightCombinations
 
 variables = {
     "astau": {
-        "fixed": False,
-        "value": 0.323,
+        "fixed": True,
+        "value": 0.3317,
         "stepSize": 0.1
     },
     "aGGInv": {
-        "fixed": False,
+        "fixed": True,
         "value": 2.1e-2,
         "stepSize": 0.01
     },
@@ -24,7 +24,7 @@ variables = {
         "stepSize": 0.1
     },
     "c10": {
-        "fixed": False,
+        "fixed": True,
         "value": -0.5,
         "stepSize": 0.1
     },
@@ -78,9 +78,10 @@ variables = {
 
 s0s = [
     3.1572314596000002, 3.000, 2.800, 2.600, 2.400, 2.300,
-    2.200, 2.100, 2.000, 1.950, 1.900, 1.850
-    # 1.800, 1.750, 1.700, 1.675, 1.650, 1.625,
-    # 1.600, 1.575, 1.550, 1.525, 1.500, 1.475,
+    2.200, 2.100, 2.000, 1.950, 1.900, 1.850,
+    1.800, 1.750, 1.700, 1.675, 1.650, 1.625,
+    1.600, 1.575, 1.550, 1.525, 1.500
+    #,1.475,
     # 1.450, 1.425, 1.400, 1.375, 1.350, 1.325,
     # 1.300, 1.275, 1.250, 1.225, 1.200, 1.175,
     # 1.150, 1.125, 1.100, 1.075, 1.050, 1.025,
@@ -103,7 +104,7 @@ dsbins = [
 
 #s0s.sort()
 weightDict = {1: 'wKin', 14: 'wCube', 15: 'wQuart'}
-weight = 19
+weight = 1
 
 def dof(s0s, variables):
     dof = len(s0s)
@@ -168,7 +169,7 @@ configTemplate = {
         "D4": True,
         "D6": True,
         "D8": True,
-        "D10": True,
+        "D10": False,
         "D12": False,
         "DV": False,
         "PionPole": True
