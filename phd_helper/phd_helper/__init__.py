@@ -56,6 +56,15 @@ def read_csv(path, exclude=[]):
     return df
 
 
+def conv_col_to_label(col):
+    if(col == 'c6'):
+        return r'$\rho^{(6)}$'
+    if(col == 'c8'):
+        return r'$\rho^{(8)}$'
+
+    return col
+
+
 def addAx(axarr, i, cols, data, title='', ylabel='', xlabel='', ylim=(None, None), exErr=[]):
     axarr[i].set_title(title)
     axarr[i].set_ylabel(ylabel)
@@ -71,7 +80,7 @@ def addAx(axarr, i, cols, data, title='', ylabel='', xlabel='', ylim=(None, None
             yerr=None if col in exErr else data[col+'Err'],
             fmt='.',
             marker='o',
-            label=r'$\alpha_s(m_\tau)$' if col == 'alpha' else col,
+            label=r'$\alpha_s(m_\tau)$' if col == 'alpha' else conv_col_to_label(col),
         )
         # if mfcs:
         #     if isinstance(lines, list):

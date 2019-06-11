@@ -1,0 +1,6 @@
+phd_helper/__init__.py
+phd_helper.egg-info/PKG-INFO
+phd_helper.egg-info/SOURCES.txt
+phd_helper.egg-info/dependency_links.txt
+phd_helper.egg-info/not-zip-safe
+phd_helper.egg-info/top_level.txt

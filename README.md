@@ -1,3 +1,6 @@
+# PhD Helper
+To install execute `pip install -e ./phd_helper` from root
+
 # List of scripts
 - bin_upper_edges.ipynb
 - FESRConfigGenerator.py 
